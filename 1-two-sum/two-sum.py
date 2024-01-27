@@ -1,10 +1,16 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        answer_list = []
-        list_len = len(nums)
-        for idx1 in range(0, list_len):
-            for idx2 in range(idx1 +1, list_len):
-                if nums[idx1] + nums[idx2] == target:
-                    answer_list.append(idx1)
-                    answer_list.append(idx2)
-                    return answer_list
+        num_dict = {}  # Dictionary to store numbers and their indices
+
+        for idx, num in enumerate(nums):
+            complement = target - num
+
+            # Check if the complement is already in the dictionary
+            if complement in num_dict:
+                return [num_dict[complement], idx]
+
+            # Add the current number and its index to the dictionary
+            num_dict[num] = idx
+
+        # If no solution is found, return an empty list
+        return []
